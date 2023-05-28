@@ -11,7 +11,7 @@ import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import UpdatePlace from './places/pages/UpdatePlace';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
-
+//cannot place places/placeId above places/new otherwise every matching request triggers former and never latter.
 const App = () => {
   return (
     <Router>
