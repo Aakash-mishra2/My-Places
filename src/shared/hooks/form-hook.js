@@ -6,6 +6,9 @@ const formReducer = (state, action) => {
       let formIsValid = true;
       for (const inputId in state.inputs) {
         if (inputId === action.inputId) {
+          if (!state.inputs[inputId]) {
+            continue; //don't go ahead with this iteration of for loop and go to next iteration.
+          }
           formIsValid = formIsValid && action.isValid;
         } else {
           formIsValid = formIsValid && state.inputs[inputId].isValid;
