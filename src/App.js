@@ -25,6 +25,43 @@ const App = () => {
     setIsLoggedIn(false);
   }, []);
   //now this new value will be passed down to all components down here that are interested.
+
+  let routes;
+  if (isLoggedIn) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <UserPlaces />
+        </Route>
+        <Route path="/places/new" exact>
+          <NewPlace />
+        </Route>
+        <Route path="/places/:placeId">
+          <UpdatePlace />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <UserPlaces />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Redirect to="/auth" />
+      </Switch>
+    );
+  }
+  //default whenever we are on any route which is not handled before.
   return (
     <AuthContext.Provider
       value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
@@ -32,24 +69,7 @@ const App = () => {
       <Router>
         <MainNavigation />
         <main>
-          <Switch>
-            <Route path="/" exact>
-              <Users />
-            </Route>
-            <Route path="/:userId/places" exact>
-              <UserPlaces />
-            </Route>
-            <Route path="/places/new" exact>
-              <NewPlace />
-            </Route>
-            <Route path="/places/:placeId">
-              <UpdatePlace />
-            </Route>
-            <Route path="/auth">
-              <Auth />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
+          {routes}
         </main>
       </Router>
     </AuthContext.Provider>
