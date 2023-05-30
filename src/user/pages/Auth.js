@@ -46,9 +46,32 @@ const Auth = () => {
         }
         setLoginMode(prevMode => !prevMode);
     };
-    const userSubmitHandler = (event) => {
+    const userSubmitHandler = async event => {
         event.preventDefault();
-        console.log(formState.inputs);
+        if (isLogin) {
+
+        } else {
+            try {
+                const response = await fetch('https://localhost:5000/api/users/signup', {
+                    method: 'POST',
+                    headers: {
+                        //without backend won't know what kind of data it recieves. our body parser will not kick in correctly.
+                        'Content-Type': 'application/json'
+                    },
+                    //takes regular js data array or object and covert to json data.
+                    //keys that I am expecting at the backend route inside fetch when we expect new user.
+                    body: JSON.stringify({
+                        name: formState.inputs.name.value,
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+                console.log(responseData);
+            } catch (err) {
+                console.log(err);
+            }
+        }
         auth.login();
     };
     return (
