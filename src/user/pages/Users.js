@@ -1,7 +1,7 @@
 import React from 'react';
 
 import UsersList from '../components/UsersList';
-
+//get request for users whenever this page loads.
 const Users = () => {
   const USERS = [
     {
@@ -12,7 +12,6 @@ const Users = () => {
       places: 3
     }
   ];
-
   return <UsersList items={USERS} />;
 };
 

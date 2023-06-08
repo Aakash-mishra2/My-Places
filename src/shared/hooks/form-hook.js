@@ -10,10 +10,12 @@ const formReducer = (state, action) => {
             continue; //don't go ahead with this iteration of for loop and go to next iteration.
           }
           formIsValid = formIsValid && action.isValid;
-        } else {
+        }
+        else {
           formIsValid = formIsValid && state.inputs[inputId].isValid;
         }
       }
+
       return {
         ...state,
         inputs: {

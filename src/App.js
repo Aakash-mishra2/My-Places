@@ -15,17 +15,15 @@ import Auth from './user/pages/Auth';
 import { AuthContext } from './shared/context/auth-context';
 //cannot place places/placeId above places/new otherwise every matching request triggers former and never latter.
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-  }, []);
   //now this new value will be passed down to all components down here that are interested.
-
+  const [isLoggedIn, setIsloggedIn] = useState(false);
+  const login = useCallback(() => {
+    setIsloggedIn(true);
+  }, []);
+  const logout = useCallback(() => {
+    setIsloggedIn(false);
+  }, []);
   let routes;
   if (isLoggedIn) {
     routes = (
