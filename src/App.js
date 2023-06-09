@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
+  Routes,
   Redirect,
-  Switch
+  Route
 } from 'react-router-dom';
 
 import Users from './user/pages/Users';
@@ -29,36 +29,22 @@ const App = () => {
   let routes;
   if (isLoggedIn) {
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <Users />
-        </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
-        </Route>
-        <Route path="/places/new" exact>
-          <NewPlace />
-        </Route>
-        <Route path="/places/:placeId">
-          <UpdatePlace />
-        </Route>
+      <Routes>
+        <Route path="/" element = { <Users /> } />
+        <Route path="/:userId/places" element={<UserPlaces />} />
+        <Route path="/places/new" element={<NewPlace />} />
+        <Route path="/places/:placeId" element={<UpdatePlace />} />
         <Redirect to="/" />
-      </Switch>
+      </Routes>
     );
   } else {
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <Users />
-        </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
-        </Route>
-        <Route path="/auth">
-          <Auth />
-        </Route>
+      <Routes>
+        <Route path="/" element = {<Users />} />
+        <Route path="/:userId/places" element={<UserPlaces />} />
+        <Route path="/auth" element={ <Auth />} />
         <Redirect to="/auth" />
-      </Switch>
+      </Routes>
     );
   }
   //default whenever we are on any route which is not handled before.
